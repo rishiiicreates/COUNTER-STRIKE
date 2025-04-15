@@ -43,10 +43,11 @@ const GameInterface: React.FC = () => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
 
-    const onMouseOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).classList.contains('cursor-link') ||
-          (e.target as HTMLElement).tagName === 'BUTTON' ||
-          (e.target as HTMLElement).tagName === 'A') {
+    const onMouseOver = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('cursor-link') ||
+          target.tagName === 'BUTTON' ||
+          target.tagName === 'A') {
         setCursorHover(true);
       }
     };
@@ -56,16 +57,24 @@ const GameInterface: React.FC = () => {
     };
 
     window.addEventListener('mousemove', onMouseMove);
-    document.querySelectorAll('button, a, .cursor-link').forEach(element => {
-      element.addEventListener('mouseover', onMouseOver);
-      element.addEventListener('mouseout', onMouseOut);
-    });
+    
+    const handleButtonInteractions = () => {
+      const buttons = document.querySelectorAll('button, a, .cursor-link');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', onMouseOver);
+        button.addEventListener('mouseleave', onMouseOut);
+      });
+      
+      return buttons;
+    };
+    
+    const buttons = handleButtonInteractions();
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      document.querySelectorAll('button, a, .cursor-link').forEach(element => {
-        element.removeEventListener('mouseover', onMouseOver);
-        element.removeEventListener('mouseout', onMouseOut);
+      buttons.forEach(button => {
+        button.removeEventListener('mouseenter', onMouseOver);
+        button.removeEventListener('mouseleave', onMouseOut);
       });
     };
   }, []);
@@ -372,11 +381,17 @@ const GameInterface: React.FC = () => {
                                   </div>
                                 </div>
                                 
-                                <div className="weapon-image mt-4 mb-4 flex justify-center overflow-hidden">
+                                <div className="weapon-image mt-4 mb-4 flex justify-center overflow-hidden bg-black/30 p-2 border border-primary/20">
                                   <img 
                                     src={weaponImage} 
                                     alt={weapon.name}
                                     className="w-full h-32 object-contain"
+                                    onError={(e) => {
+                                      const target = e.target as HTMLImageElement;
+                                      target.onerror = null;
+                                      console.log(`Failed to load image: ${target.src}`);
+                                      target.style.display = 'none';
+                                    }}
                                   />
                                 </div>
                                 
@@ -440,6 +455,12 @@ const GameInterface: React.FC = () => {
                                   src={mapImage} 
                                   alt={`${map.name} map`}
                                   className="absolute inset-0 w-full h-full object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    console.log(`Failed to load map image: ${target.src}`);
+                                    target.style.display = 'none';
+                                  }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
@@ -602,6 +623,12 @@ const GameInterface: React.FC = () => {
                             src={highlightSvg} 
                             alt="Operation Highlights"
                             className="absolute inset-0 w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.onerror = null;
+                              console.log(`Failed to load highlight image: ${target.src}`);
+                              target.style.display = 'none';
+                            }}
                           />
                           
                           <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -632,6 +659,12 @@ const GameInterface: React.FC = () => {
                                 src={video.image} 
                                 alt={video.title}
                                 className="absolute inset-0 w-full h-full object-cover"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.onerror = null;
+                                  console.log(`Failed to load video image: ${target.src}`);
+                                  target.style.display = 'none';
+                                }}
                               />
                               
                               <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -683,12 +716,16 @@ const GameInterface: React.FC = () => {
             </motion.div>
             
             {/* Interface Elements Overlay */}
-            <div className="interface-elements absolute top-2 right-2 flex space-x-2">
-              <div className="w-3 h-3 border border-primary"></div>
-              <div className="w-3 h-3 border border-primary bg-primary animate-ping"></div>
+            <div className="absolute top-2 right-4 flex space-x-2 z-50">
+              <div className="terminal-control w-4 h-4 border border-primary flex items-center justify-center">
+                <div className="w-2 h-2 bg-primary animate-pulse"></div>
+              </div>
+              <div className="terminal-control w-4 h-4 border border-primary flex items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors">
+                <div className="w-2 h-0.5 bg-primary"></div>
+              </div>
             </div>
             
-            <div className="absolute bottom-2 left-2 text-xs text-primary/50">
+            <div className="absolute bottom-4 left-4 text-xs text-primary/50 z-20">
               SECURED CHANNEL • ID: 7N38X92
             </div>
           </div>
