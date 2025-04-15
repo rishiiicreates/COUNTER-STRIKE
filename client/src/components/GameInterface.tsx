@@ -150,82 +150,194 @@ const GameInterface: React.FC = () => {
   }
   
   return (
-    <div className="tactical-ui min-h-screen bg-black text-primary font-mono">
+    <div className="tactical-ui min-h-screen bg-black text-primary font-mono relative overflow-hidden">
+      {/* Background grid effect */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full grid grid-cols-12 gap-0.5">
+          {Array(12).fill(0).map((_, i) => (
+            <div key={`col-${i}`} className="h-full border-r border-primary/30"></div>
+          ))}
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full grid grid-rows-12 gap-0.5">
+          {Array(12).fill(0).map((_, i) => (
+            <div key={`row-${i}`} className="w-full border-b border-primary/30"></div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Scanline effect */}
+      <div className="scanlines absolute inset-0 z-0 pointer-events-none opacity-10 bg-scanline"></div>
+      
       {/* Interface Header */}
-      <header className="border-b border-primary/50 p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <div className="w-8 h-8 border-2 border-primary flex items-center justify-center">
-              <div className="w-4 h-4 bg-primary"></div>
-            </div>
-            <h1 className="font-stratum text-xl">TACTICAL OPERATIONS</h1>
-          </div>
-          
-          <div className="flex items-center space-x-6">
-            <div className="hidden md:flex space-x-4">
-              <div className="text-xs p-2 border border-primary/50 flex items-center">
-                <span className="w-2 h-2 bg-green-500 animate-pulse mr-2"></span>
-                <span>ONLINE</span>
-              </div>
-              <div className="text-xs p-2 border border-primary/50">
-                NAV: <span className="text-white">MAIN</span>
-              </div>
-            </div>
-            <motion.button 
-              className="border-2 border-primary px-4 py-2 hover:bg-primary hover:text-black transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+      <motion.header 
+        className="relative z-10 py-6"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <motion.div 
+              className="flex items-center space-x-4 mb-4 md:mb-0"
+              initial={{ x: -30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
             >
-              LOGIN
-            </motion.button>
+              <div className="w-10 h-10 border-2 border-primary flex items-center justify-center relative">
+                <div className="w-5 h-5 bg-primary"></div>
+                <div className="absolute -top-1 -left-1 w-2 h-2 border border-primary bg-black"></div>
+                <div className="absolute -bottom-1 -right-1 w-2 h-2 border border-primary bg-black"></div>
+              </div>
+              <div>
+                <h1 className="font-stratum text-2xl tracking-wider">
+                  <span className="text-primary">TACTICAL</span>
+                  <span className="text-white">OPERATIONS</span>
+                </h1>
+                <div className="text-xs text-primary/70 tracking-widest">SYSTEM V2.5.4 // CLASSIFIED</div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="flex items-center space-x-4"
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <div className="hidden md:flex space-x-3">
+                <div className="terminal-tag bg-black text-xs py-1 px-3 border border-primary/50 flex items-center">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                  <span>SECURE.CONNECTION</span>
+                </div>
+                <div className="terminal-tag bg-black text-xs py-1 px-3 border border-primary/50 relative overflow-hidden group">
+                  <span className="relative z-10">NET.STATUS: ONLINE</span>
+                  <div className="absolute inset-0 bg-primary/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                </div>
+              </div>
+              <motion.button 
+                className="hexagon-button relative py-2 px-5 group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="relative z-10 font-bold tracking-wider">ACCESS</span>
+                <div className="absolute inset-0 border-2 border-primary"></div>
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/90 transition-all duration-300"></div>
+                <div className="absolute inset-0 group-hover:text-black transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <span className="font-bold tracking-wider">ACCESS</span>
+                </div>
+                <div className="absolute -top-1 -left-1 w-2 h-2 border border-primary"></div>
+                <div className="absolute -bottom-1 -right-1 w-2 h-2 border border-primary"></div>
+              </motion.button>
+            </motion.div>
           </div>
         </div>
-      </header>
+      </motion.header>
       
-      {/* Grid Layout */}
-      <div className="container mx-auto py-8 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-2">
-          {/* Sidebar Menu */}
-          <div className="menu-sidebar border-2 border-primary/50 p-2 bg-black/80">
-            <div className="menu-title border-b border-primary/50 p-2 mb-4">
-              <div className="text-center font-stratum text-lg">COMMAND MENU</div>
+      {/* Advanced Terminal UI Layout */}
+      <div className="container mx-auto py-8 px-4 relative z-10">
+        <div className="terminal-frame border-2 border-primary relative">
+          <div className="terminal-header bg-primary/10 border-b border-primary px-4 py-2 flex justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+              <div className="terminal-id text-xs">TERMINAL://MAIN_INTERFACE</div>
             </div>
-            
-            <div className="menu-options space-y-2">
-              {mainOptions.map(option => (
-                <motion.button
-                  key={option.id}
-                  className={`w-full py-3 px-4 text-left border ${activeMenu === option.id ? 'border-primary bg-primary/10 text-white' : 'border-primary/30 hover:border-primary/60'}`}
-                  onClick={() => handleMenuClick(option.id)}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span className="mr-2">[{option.id.charAt(0)}]</span>
-                  {option.label}
-                </motion.button>
-              ))}
-            </div>
-            
-            <div className="mt-8 p-2 border border-primary/30 text-xs">
-              <div className="mb-2 border-b border-primary/30 pb-1">SYSTEM STATUS</div>
-              <div className="flex justify-between mb-1">
-                <span>CPU:</span>
-                <span className="text-green-400">OPTIMAL</span>
+            <div className="flex space-x-2">
+              <div className="terminal-controls w-4 h-4 border border-primary flex items-center justify-center">
+                <div className="w-2 h-0.5 bg-primary"></div>
               </div>
-              <div className="flex justify-between mb-1">
-                <span>MEMORY:</span>
-                <span className="text-green-400">86%</span>
+              <div className="terminal-controls w-4 h-4 border border-primary flex items-center justify-center">
+                <div className="w-2 h-2 bg-primary"></div>
               </div>
-              <div className="flex justify-between">
-                <span>CONNECTION:</span>
-                <span className="text-green-400">SECURE</span>
-              </div>
+              <div className="terminal-controls w-4 h-4 border border-primary text-xs flex items-center justify-center">x</div>
             </div>
           </div>
           
-          {/* Main Content Area */}
-          <div className="main-content lg:col-span-4 border-2 border-primary/50 bg-black/80 p-4 relative min-h-[600px]">
-            <AnimatePresence mode="wait">
+          <div className="terminal-body p-6 flex flex-col lg:flex-row">
+            {/* Command Console */}
+            <motion.div 
+              className="command-console w-full lg:w-64 border border-primary bg-black/60 mb-6 lg:mb-0 lg:mr-6 relative overflow-hidden"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <div className="console-header border-b border-primary/50 p-3">
+                <div className="text-sm font-stratum">COMMAND INTERFACE</div>
+              </div>
+              
+              <div className="command-list p-2 space-y-1">
+                {mainOptions.map((option, index) => (
+                  <motion.button
+                    key={option.id}
+                    className={`w-full py-2 px-3 text-left text-sm bg-black/60 hover:bg-primary/20 relative overflow-hidden group ${activeMenu === option.id ? 'active-command' : ''}`}
+                    onClick={() => handleMenuClick(option.id)}
+                    whileHover={{ x: 3 }}
+                    whileTap={{ scale: 0.98 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + (index * 0.1), duration: 0.3 }}
+                  >
+                    <div className="flex items-center">
+                      <div className={`command-indicator w-3 h-3 border ${activeMenu === option.id ? 'border-primary bg-primary/50' : 'border-primary/50'} mr-3 relative`}>
+                        {activeMenu === option.id && (
+                          <div className="absolute inset-0 bg-primary/50 animate-pulse"></div>
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span>{option.label}</span>
+                          <span className="text-xs text-primary/50">[{option.id.charAt(0).toUpperCase()}]</span>
+                        </div>
+                        <div className="h-0.5 w-0 bg-primary group-hover:w-full transition-all duration-300 mt-0.5"></div>
+                      </div>
+                    </div>
+                    {activeMenu === option.id && (
+                      <div className="absolute right-0 top-0 bottom-0 w-1 bg-primary"></div>
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+              
+              <div className="console-stats p-3 border-t border-primary/50 text-xs space-y-2 mt-auto">
+                <div className="stat-item">
+                  <div className="flex justify-between mb-1">
+                    <span>SYS INTEGRITY</span>
+                    <span>97%</span>
+                  </div>
+                  <div className="h-1 bg-primary/20">
+                    <div className="h-full bg-primary" style={{ width: '97%' }}></div>
+                  </div>
+                </div>
+                <div className="stat-item">
+                  <div className="flex justify-between mb-1">
+                    <span>MEMORY USAGE</span>
+                    <span>64%</span>
+                  </div>
+                  <div className="h-1 bg-primary/20">
+                    <div className="h-full bg-primary" style={{ width: '64%' }}></div>
+                  </div>
+                </div>
+                <div className="stat-item">
+                  <div className="flex justify-between mb-1">
+                    <span>NETWORK</span>
+                    <span>SECURE</span>
+                  </div>
+                  <div className="h-1 bg-primary/20">
+                    <div className="h-full bg-green-500" style={{ width: '100%' }}></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="absolute -bottom-10 -right-10 w-20 h-20 border border-primary rounded-full opacity-10"></div>
+              <div className="absolute -top-10 -left-10 w-20 h-20 border border-primary rounded-full opacity-10"></div>
+            </motion.div>
+            
+            {/* Main Display */}
+            <motion.div 
+              className="main-display flex-1 border border-primary bg-black/60 min-h-[600px] relative overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+            >
+              <AnimatePresence mode="wait">
               {activeMenu ? (
                 <motion.div
                   key={activeMenu}
@@ -589,6 +701,7 @@ const GameInterface: React.FC = () => {
                 </motion.div>
               )}
             </AnimatePresence>
+            </motion.div>
             
             {/* Interface Elements Overlay */}
             <div className="interface-elements absolute top-2 right-2 flex space-x-2">
