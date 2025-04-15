@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .media-grid {
+      stroke: #00ff9922;
+      stroke-width: 1;
+    }
+    .media-border {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 3;
+    }
+    .media-details {
+      fill: #00ff9944;
+      stroke: #00ff99;
+      stroke-width: 1;
+    }
+    .media-text {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      fill: #00ff99;
+    }
+    .media-highlight {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 1;
+      stroke-dasharray: 5,5;
+    }
+    .media-overlay {
+      fill: url(#grid-pattern);
+      opacity: 0.2;
+    }
+  </style>
+  
+  <defs>
+    <pattern id="grid-pattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+      <rect width="20" height="20" fill="none"/>
+      <path d="M 0,0 L 20,0" stroke="#00ff99" stroke-width="0.5"/>
+      <path d="M 0,0 L 0,20" stroke="#00ff99" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background grid -->
+  <g class="media-grid">
+    <rect x="0" y="0" width="800" height="450" fill="#111111" />
+    <!-- Horizontal grid lines -->
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="350" x2="800" y2="350" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    
+    <!-- Vertical grid lines -->
+    <line x1="100" y1="0" x2="100" y2="450" />
+    <line x1="200" y1="0" x2="200" y2="450" />
+    <line x1="300" y1="0" x2="300" y2="450" />
+    <line x1="400" y1="0" x2="400" y2="450" />
+    <line x1="500" y1="0" x2="500" y2="450" />
+    <line x1="600" y1="0" x2="600" y2="450" />
+    <line x1="700" y1="0" x2="700" y2="450" />
+  </g>
+  
+  <!-- Video frame -->
+  <rect x="100" y="100" width="600" height="300" class="media-border" />
+  <rect x="100" y="100" width="600" height="300" class="media-overlay" />
+  
+  <!-- Player interface -->
+  <rect x="100" y="350" width="600" height="50" fill="#111111" opacity="0.7" />
+  
+  <!-- Player controls -->
+  <circle cx="150" cy="375" r="15" class="media-details" />
+  <path d="M 145,368 L 145,382 L 158,375 Z" fill="#00ff99" />
+  
+  <rect x="180" y="370" width="450" height="10" rx="5" ry="5" fill="#333333" />
+  <rect x="180" y="370" width="200" height="10" rx="5" ry="5" class="media-details" />
+  
+  <text x="650" y="378" class="media-text" text-anchor="middle" font-size="12">12:47</text>
+  
+  <!-- Action sequence -->
+  <polygon points="400,200 380,150 420,150" fill="#00ff9966" class="media-highlight" />
+  <polygon points="500,250 480,200 520,200" fill="#00ff9966" class="media-highlight" />
+  <polygon points="300,270 280,220 320,220" fill="#00ff9966" class="media-highlight" />
+  
+  <!-- Targeting elements -->
+  <circle cx="500" cy="250" r="30" class="media-highlight" />
+  <line x1="470" y1="250" x2="530" y2="250" class="media-highlight" />
+  <line x1="500" y1="220" x2="500" y2="280" class="media-highlight" />
+  
+  <!-- Video title -->
+  <text x="400" y="50" class="media-text" text-anchor="middle" font-size="24">OPERATION HIGHLIGHTS</text>
+  <text x="400" y="80" class="media-text" text-anchor="middle" font-size="14">CHAMPIONSHIP FINALS</text>
+  
+  <!-- Stats overlay -->
+  <rect x="600" y="120" width="80" height="100" fill="#111111" opacity="0.7" />
+  <text x="640" y="140" class="media-text" text-anchor="middle" font-size="12">KILLS: 4</text>
+  <text x="640" y="160" class="media-text" text-anchor="middle" font-size="12">HS%: 75</text>
+  <text x="640" y="180" class="media-text" text-anchor="middle" font-size="12">DMG: 412</text>
+  <text x="640" y="200" class="media-text" text-anchor="middle" font-size="12">MVP</text>
+</svg>

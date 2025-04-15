@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .weapon-parts {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 2;
+    }
+    .weapon-highlights {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 1;
+      stroke-opacity: 0.5;
+    }
+    .weapon-details {
+      fill: #00ff9944;
+      stroke: #00ff99;
+      stroke-width: 1;
+    }
+    .weapon-text {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      fill: #00ff99;
+    }
+    .weapon-grid {
+      stroke: #00ff9922;
+      stroke-width: 0.5;
+    }
+  </style>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="300" fill="#111111" />
+  
+  <!-- Grid lines -->
+  <g class="weapon-grid">
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    
+    <line x1="100" y1="0" x2="100" y2="300" />
+    <line x1="200" y1="0" x2="200" y2="300" />
+    <line x1="300" y1="0" x2="300" y2="300" />
+    <line x1="400" y1="0" x2="400" y2="300" />
+    <line x1="500" y1="0" x2="500" y2="300" />
+    <line x1="600" y1="0" x2="600" y2="300" />
+    <line x1="700" y1="0" x2="700" y2="300" />
+  </g>
+  
+  <!-- AK-47 Outline -->
+  <!-- Stock -->
+  <path class="weapon-parts" d="M100,150 L200,150 L200,170 L230,200 L200,230 L100,230 Z" />
+  
+  <!-- Grip -->
+  <path class="weapon-parts" d="M230,190 L250,190 L260,220 L240,230 L230,220 Z" />
+  
+  <!-- Receiver -->
+  <path class="weapon-parts" d="M250,150 L400,150 L400,180 L250,180 Z" />
+  
+  <!-- Trigger -->
+  <path class="weapon-details" d="M280,180 L290,180 L290,210 L280,210 Z" />
+  
+  <!-- Magazine -->
+  <path class="weapon-parts" d="M300,180 L330,180 L340,250 L320,250 L310,240 Z" />
+  
+  <!-- Handguard -->
+  <path class="weapon-parts" d="M400,150 L450,150 L450,180 L400,180 Z" />
+  
+  <!-- Gas tube -->
+  <path class="weapon-highlights" d="M420,140 L580,140" />
+  
+  <!-- Barrel -->
+  <path class="weapon-parts" d="M450,160 L600,160 L600,170 L450,170 Z" />
+  
+  <!-- Front sight -->
+  <path class="weapon-details" d="M580,140 L580,160 M570,140 L590,140" />
+  
+  <!-- Muzzle -->
+  <path class="weapon-parts" d="M600,155 L620,155 L620,175 L600,175 Z" />
+  
+  <!-- Dust cover -->
+  <path class="weapon-highlights" d="M250,150 L400,150 L400,140 L350,120 L250,120 Z" />
+  
+  <!-- Ejection port -->
+  <rect x="320" y="140" width="30" height="10" class="weapon-details" />
+  
+  <!-- Weapon name and details -->
+  <text x="400" y="50" class="weapon-text" text-anchor="middle" font-size="24">AK-47</text>
+  <text x="400" y="80" class="weapon-text" text-anchor="middle" font-size="14">ASSAULT RIFLE</text>
+  
+  <!-- Damage indicator -->
+  <path class="weapon-details" d="M650,50 L750,50 L750,70 L650,70 Z" />
+  <rect x="650" y="50" width="85" height="20" fill="#00ff9944" />
+  <text x="700" y="65" class="weapon-text" text-anchor="middle" font-size="12">DAMAGE: 85%</text>
+  
+  <!-- Ammo indicator -->
+  <text x="700" y="100" class="weapon-text" text-anchor="middle" font-size="12">AMMO: 7.62×39MM</text>
+  <text x="700" y="120" class="weapon-text" text-anchor="middle" font-size="12">CAPACITY: 30</text>
+</svg>

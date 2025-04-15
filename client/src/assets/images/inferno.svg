@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .map-grid {
+      stroke: #00ff9922;
+      stroke-width: 1;
+    }
+    .map-outline {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 3;
+    }
+    .map-site {
+      fill: #00ff9944;
+      stroke: #00ff99;
+      stroke-width: 2;
+    }
+    .map-text {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      fill: #00ff99;
+    }
+    .map-path {
+      fill: none;
+      stroke: #00ff9955;
+      stroke-width: 2;
+      stroke-dasharray: 5,5;
+    }
+    .map-detail {
+      fill: none;
+      stroke: #00aa66;
+      stroke-width: 1;
+    }
+  </style>
+  
+  <!-- Background grid -->
+  <g class="map-grid">
+    <rect x="0" y="0" width="800" height="450" fill="#111111" />
+    <!-- Horizontal grid lines -->
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="350" x2="800" y2="350" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    
+    <!-- Vertical grid lines -->
+    <line x1="100" y1="0" x2="100" y2="450" />
+    <line x1="200" y1="0" x2="200" y2="450" />
+    <line x1="300" y1="0" x2="300" y2="450" />
+    <line x1="400" y1="0" x2="400" y2="450" />
+    <line x1="500" y1="0" x2="500" y2="450" />
+    <line x1="600" y1="0" x2="600" y2="450" />
+    <line x1="700" y1="0" x2="700" y2="450" />
+  </g>
+  
+  <!-- Map outline -->
+  <path class="map-outline" d="M150,100 L650,100 L650,350 L150,350 Z" />
+  
+  <!-- Streets and alleys -->
+  <path class="map-detail" d="M250,100 L250,350" />
+  <path class="map-detail" d="M550,100 L550,350" />
+  <path class="map-detail" d="M150,200 L650,200" />
+  <path class="map-detail" d="M350,100 L350,200" />
+  <path class="map-detail" d="M450,200 L450,350" />
+  
+  <!-- Bomb sites -->
+  <polygon class="map-site" points="550,120 600,120 600,170 550,170" />
+  <text x="575" y="155" class="map-text" text-anchor="middle">A</text>
+  
+  <polygon class="map-site" points="200,280 250,280 250,330 200,330" />
+  <text x="225" y="315" class="map-text" text-anchor="middle">B</text>
+  
+  <!-- Special locations -->
+  <rect x="300" y="225" width="100" height="75" class="map-detail" />
+  <text x="350" y="270" class="map-text" text-anchor="middle" font-size="14">BANANA</text>
+  
+  <circle cx="500" cy="300" r="30" class="map-detail" />
+  <text x="500" y="305" class="map-text" text-anchor="middle" font-size="14">PIT</text>
+  
+  <!-- Paths -->
+  <path class="map-path" d="M225,280 L300,270" />
+  <path class="map-path" d="M400,250 L450,250" />
+  <path class="map-path" d="M500,270 L575,220" />
+  <path class="map-path" d="M350,150 L500,150" />
+  
+  <!-- Map name -->
+  <text x="400" y="50" class="map-text" text-anchor="middle" font-size="30">INFERNO</text>
+  <text x="400" y="80" class="map-text" text-anchor="middle" font-size="14">TACTICAL MAP</text>
+  
+  <!-- Coordinates -->
+  <text x="750" y="430" class="map-text" text-anchor="end" font-size="12">COORDINATES: 42.36.95N</text>
+</svg>
