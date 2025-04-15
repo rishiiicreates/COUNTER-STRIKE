@@ -2,46 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 98%;
+    --background: 170 50% 4%;
+    --foreground: 160 15% 95%;
     
-    --card: 0 0% 15%;
-    --card-foreground: 0 0% 98%;
+    --card: 180 30% 7%;
+    --card-foreground: 160 15% 95%;
     
-    --popover: 0 0% 15%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 180 30% 7%;
+    --popover-foreground: 160 15% 95%;
     
-    --primary: 36 100% 52%;
-    --primary-foreground: 0 0% 10%;
+    --primary: 150 100% 50%;
+    --primary-foreground: 180 30% 7%;
     
-    --secondary: 0 0% 16%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 170 50% 10%;
+    --secondary-foreground: 160 15% 95%;
     
-    --muted: 0 0% 40%;
-    --muted-foreground: 0 0% 80%;
+    --muted: 180 20% 40%;
+    --muted-foreground: 160 10% 80%;
     
-    --accent: 118 100% 37%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 210 100% 60%;
+    --accent-foreground: 160 15% 95%;
     
     --destructive: 0 100% 62%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 160 15% 95%;
     
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 36 100% 52%;
+    --border: 170 50% 15%;
+    --input: 170 50% 15%;
+    --ring: 150 100% 50%;
     
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 80%;
-    --sidebar-primary: 36 100% 52%;
-    --sidebar-primary-foreground: 0 0% 10%;
-    --sidebar-accent: 118 100% 37%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 36 100% 52%;
+    --sidebar-background: 180 30% 5%;
+    --sidebar-foreground: 160 10% 80%;
+    --sidebar-primary: 150 100% 50%;
+    --sidebar-primary-foreground: 180 30% 7%;
+    --sidebar-accent: 210 100% 60%;
+    --sidebar-accent-foreground: 160 15% 95%;
+    --sidebar-border: 170 50% 15%;
+    --sidebar-ring: 150 100% 50%;
     
-    --radius: 0.3rem;
+    --radius: 0rem;
   }
   
   * {
@@ -49,10 +51,13 @@
   }
   
   body {
-    @apply font-roboto antialiased bg-background text-foreground;
+    @apply font-mono antialiased bg-background text-foreground;
     overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background-image: 
+      radial-gradient(circle at 20% 30%, hsla(var(--primary) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsla(var(--accent) / 0.1) 0%, transparent 50%);
   }
   
   body::-webkit-scrollbar {
@@ -71,6 +76,10 @@
   
   .font-roboto {
     font-family: 'Roboto Condensed', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'Share Tech Mono', monospace;
   }
   
   .clip-diagonal {
@@ -94,19 +103,57 @@
     height: 100%;
     background: repeating-linear-gradient(
       135deg,
-      rgba(255, 156, 7, 0.1),
-      rgba(255, 156, 7, 0.1) 1px,
+      hsla(var(--primary) / 0.05),
+      hsla(var(--primary) / 0.05) 1px,
       transparent 1px,
       transparent 10px
     );
     pointer-events: none;
+  }
+  
+  /* Terminal UI elements */
+  .terminal-line {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  
+  .terminal-line::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: hsl(var(--primary));
+  }
+  
+  .scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to bottom, 
+      transparent 0%,
+      hsla(var(--primary) / 0.2) 50%,
+      transparent 100%);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  /* Grid patterns */
+  .tactical-grid {
+    background-color: hsla(var(--background));
+    background-image: 
+      linear-gradient(hsla(var(--primary) / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 0;
   }
 }
 
 @layer utilities {
   .text-glitch:hover {
     animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both;
-    text-shadow: 1px 1px 5px rgba(255, 156, 7, 0.7);
+    text-shadow: 1px 1px 5px hsla(var(--primary) / 0.7);
   }
   
   .neon-flicker {
@@ -119,6 +166,36 @@
   
   .animate-pulse-slow {
     animation: pulse 3s infinite;
+  }
+  
+  .terminal-typing::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+  }
+  
+  .hex-pattern {
+    background-image: repeating-linear-gradient(
+      120deg,
+      hsla(var(--primary) / 0.03),
+      hsla(var(--primary) / 0.03) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      60deg,
+      hsla(var(--primary) / 0.03),
+      hsla(var(--primary) / 0.03) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+    background-size: 70px 120px;
+  }
+  
+  .grid-lines {
+    background-image: 
+      linear-gradient(to right, hsla(var(--primary) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsla(var(--primary) / 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 }
 
@@ -149,6 +226,20 @@
 @keyframes progress {
   from { width: 0; }
   to { width: 100%; }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Custom cursor styles */
