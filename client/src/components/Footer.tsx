@@ -118,6 +118,7 @@ const Footer = () => {
           variants={itemVariants}
         >
           <p>This website is a mockup design and is not affiliated with Valve Corporation or the Counter-Strike franchise.</p>
+          <p className="mt-2">Made by <span className="text-primary font-medium">rishiicreates</span></p>
         </motion.div>
       </div>
     </motion.footer>
