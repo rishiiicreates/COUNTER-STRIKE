@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import PlaceholderImage from './ui/placeholder-image';
+
+// Import SVG images
+import dust2Svg from '../assets/images/dust2.svg';
+import mirageSvg from '../assets/images/mirage.svg';
+import nukeSvg from '../assets/images/nuke.svg';
+import infernoSvg from '../assets/images/inferno.svg';
+
+import ak47Svg from '../assets/images/ak47.svg';
+import m4a4Svg from '../assets/images/m4a4.svg';
+import awpSvg from '../assets/images/awp.svg';
+import deagleSvg from '../assets/images/deagle.svg';
+
+import highlightSvg from '../assets/images/highlight.svg';
+import video1Svg from '../assets/images/video1.svg';
+import video2Svg from '../assets/images/video2.svg';
+import video3Svg from '../assets/images/video3.svg';
+import video4Svg from '../assets/images/video4.svg';
 
 interface MenuOption {
   id: string;
@@ -228,39 +244,68 @@ const GameInterface: React.FC = () => {
                       </div>
                       
                       <div className="weapon-grid grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {arsenalData.map(weapon => (
-                          <motion.div 
-                            key={weapon.id}
-                            className="weapon-card border border-primary/60 p-4 hover:bg-primary/10 transition-colors"
-                            whileHover={{ y: -5 }}
-                          >
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <h3 className="text-xl font-stratum">{weapon.name}</h3>
-                                <div className="text-xs text-primary/70 mt-1">TYPE: {weapon.type}</div>
-                              </div>
-                              <div className="damage-indicator">
-                                <div className="text-xs text-primary/70">DMG</div>
-                                <div className="text-xl">{weapon.damage}</div>
-                              </div>
-                            </div>
-                            
-                            <div className="weapon-stats mt-4 pt-4 border-t border-primary/30">
-                              <div className="flex items-center">
-                                <div className="h-2 bg-primary/20 flex-grow mr-2">
-                                  <div className="h-full bg-primary" style={{ width: `${weapon.damage}%` }}></div>
+                        {arsenalData.map(weapon => {
+                          // Select the correct weapon SVG based on weapon name
+                          let weaponImage;
+                          switch (weapon.name) {
+                            case 'AK-47':
+                              weaponImage = ak47Svg;
+                              break;
+                            case 'M4A4':
+                              weaponImage = m4a4Svg;
+                              break;
+                            case 'AWP':
+                              weaponImage = awpSvg;
+                              break;
+                            case 'DEAGLE':
+                              weaponImage = deagleSvg;
+                              break;
+                            default:
+                              weaponImage = ak47Svg;
+                          }
+                          
+                          return (
+                            <motion.div 
+                              key={weapon.id}
+                              className="weapon-card border border-primary/60 p-4 hover:bg-primary/10 transition-colors"
+                              whileHover={{ y: -5 }}
+                            >
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <h3 className="text-xl font-stratum">{weapon.name}</h3>
+                                  <div className="text-xs text-primary/70 mt-1">TYPE: {weapon.type}</div>
                                 </div>
-                                <div className="text-xs w-10 text-right">
-                                  {weapon.damage}%
+                                <div className="damage-indicator">
+                                  <div className="text-xs text-primary/70">DMG</div>
+                                  <div className="text-xl">{weapon.damage}</div>
                                 </div>
                               </div>
-                            </div>
-                            
-                            <div className="mt-4 text-center">
-                              <button className="border border-primary px-4 py-1 text-sm hover:bg-primary hover:text-black transition-colors">INSPECT</button>
-                            </div>
-                          </motion.div>
-                        ))}
+                              
+                              <div className="weapon-image mt-4 mb-4 flex justify-center overflow-hidden">
+                                <img 
+                                  src={weaponImage} 
+                                  alt={weapon.name}
+                                  className="w-full h-32 object-contain"
+                                />
+                              </div>
+                              
+                              <div className="weapon-stats pt-4 border-t border-primary/30">
+                                <div className="flex items-center">
+                                  <div className="h-2 bg-primary/20 flex-grow mr-2">
+                                    <div className="h-full bg-primary" style={{ width: `${weapon.damage}%` }}></div>
+                                  </div>
+                                  <div className="text-xs w-10 text-right">
+                                    {weapon.damage}%
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="mt-4 text-center">
+                                <button className="border border-primary px-4 py-1 text-sm hover:bg-primary hover:text-black transition-colors">INSPECT</button>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -274,33 +319,53 @@ const GameInterface: React.FC = () => {
                       </div>
                       
                       <div className="maps-grid grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {mapsData.map(map => (
-                          <motion.div 
-                            key={map.id}
-                            className="map-card relative border border-primary/60 aspect-video p-4 hover:bg-primary/10 transition-colors overflow-hidden"
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            <PlaceholderImage 
-                              width="100%" 
-                              height="100%" 
-                              text={`MAP: ${map.name}`}
-                              className="absolute inset-0"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                              <div className="flex justify-between items-center">
-                                <h3 className="text-xl font-stratum">{map.name}</h3>
-                                <div className={`status-tag px-2 py-1 text-xs ${map.status === 'ACTIVE' ? 'border border-green-500 text-green-500' : 'border border-yellow-500 text-yellow-500'}`}>
-                                  {map.status}
+                        {mapsData.map(map => {
+                          // Select the correct map SVG based on map name
+                          let mapImage;
+                          switch (map.name) {
+                            case 'DUST II':
+                              mapImage = dust2Svg;
+                              break;
+                            case 'MIRAGE':
+                              mapImage = mirageSvg;
+                              break;
+                            case 'NUKE':
+                              mapImage = nukeSvg;
+                              break;
+                            case 'INFERNO':
+                              mapImage = infernoSvg;
+                              break;
+                            default:
+                              mapImage = dust2Svg;
+                          }
+                          
+                          return (
+                            <motion.div 
+                              key={map.id}
+                              className="map-card relative border border-primary/60 aspect-video hover:bg-primary/10 transition-colors overflow-hidden"
+                              whileHover={{ scale: 1.02 }}
+                            >
+                              <img 
+                                src={mapImage} 
+                                alt={`${map.name} map`}
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
+                              <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                                <div className="flex justify-between items-center">
+                                  <h3 className="text-xl font-stratum">{map.name}</h3>
+                                  <div className={`status-tag px-2 py-1 text-xs ${map.status === 'ACTIVE' ? 'border border-green-500 text-green-500' : 'border border-yellow-500 text-yellow-500'}`}>
+                                    {map.status}
+                                  </div>
                                 </div>
+                                
+                                <button className="mt-4 border border-primary px-4 py-1 text-sm hover:bg-primary hover:text-black transition-colors">
+                                  INTEL
+                                </button>
                               </div>
-                              
-                              <button className="mt-4 border border-primary px-4 py-1 text-sm hover:bg-primary hover:text-black transition-colors">
-                                INTEL
-                              </button>
-                            </div>
-                          </motion.div>
-                        ))}
+                            </motion.div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -442,11 +507,10 @@ const GameInterface: React.FC = () => {
                       </div>
                       
                       <div className="featured-media mb-8 border border-primary/60 aspect-video relative overflow-hidden">
-                        <PlaceholderImage 
-                          width="100%" 
-                          height="100%" 
-                          text="OPERATION HIGHLIGHTS"
-                          className="absolute inset-0"
+                        <img 
+                          src={highlightSvg} 
+                          alt="Operation Highlights"
+                          className="absolute inset-0 w-full h-full object-cover"
                         />
                         
                         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -462,17 +526,21 @@ const GameInterface: React.FC = () => {
                       </div>
                       
                       <div className="media-thumbs grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {[1, 2, 3, 4].map(id => (
+                        {[
+                          { id: 1, image: video1Svg, title: "PRO STRATS: DUST II" },
+                          { id: 2, image: video2Svg, title: "AIM TRAINING GUIDE" },
+                          { id: 3, image: video3Svg, title: "PRO TEAM STRATEGIES" },
+                          { id: 4, image: video4Svg, title: "TOURNAMENT HIGHLIGHTS" }
+                        ].map(video => (
                           <motion.div 
-                            key={id}
+                            key={video.id}
                             className="media-thumb border border-primary/60 aspect-video relative cursor-pointer overflow-hidden"
                             whileHover={{ y: -5 }}
                           >
-                            <PlaceholderImage 
-                              width="100%" 
-                              height="100%" 
-                              text={`VIDEO ${id}`}
-                              className="absolute inset-0"
+                            <img 
+                              src={video.image} 
+                              alt={video.title}
+                              className="absolute inset-0 w-full h-full object-cover"
                             />
                             
                             <div className="absolute inset-0 flex items-center justify-center z-10">

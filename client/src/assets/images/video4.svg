@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400" height="225" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .media-grid {
+      stroke: #00ff9922;
+      stroke-width: 0.5;
+    }
+    .media-border {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 2;
+    }
+    .media-details {
+      fill: #00ff9944;
+      stroke: #00ff99;
+      stroke-width: 1;
+    }
+    .media-text {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      fill: #00ff99;
+    }
+    .media-highlight {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 1;
+    }
+    .media-overlay {
+      fill: url(#grid-pattern);
+      opacity: 0.2;
+    }
+    .stat-bar {
+      fill: #00ff9944;
+    }
+    .stat-outline {
+      fill: none;
+      stroke: #00ff99;
+      stroke-width: 1;
+    }
+  </style>
+  
+  <defs>
+    <pattern id="grid-pattern" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="none"/>
+      <path d="M 0,0 L 10,0" stroke="#00ff99" stroke-width="0.2"/>
+      <path d="M 0,0 L 0,10" stroke="#00ff99" stroke-width="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background grid -->
+  <g class="media-grid">
+    <rect x="0" y="0" width="400" height="225" fill="#111111" />
+    <!-- Horizontal grid lines -->
+    <line x1="0" y1="50" x2="400" y2="50" />
+    <line x1="0" y1="100" x2="400" y2="100" />
+    <line x1="0" y1="150" x2="400" y2="150" />
+    <line x1="0" y1="200" x2="400" y2="200" />
+    
+    <!-- Vertical grid lines -->
+    <line x1="50" y1="0" x2="50" y2="225" />
+    <line x1="100" y1="0" x2="100" y2="225" />
+    <line x1="150" y1="0" x2="150" y2="225" />
+    <line x1="200" y1="0" x2="200" y2="225" />
+    <line x1="250" y1="0" x2="250" y2="225" />
+    <line x1="300" y1="0" x2="300" y2="225" />
+    <line x1="350" y1="0" x2="350" y2="225" />
+  </g>
+  
+  <!-- Video frame -->
+  <rect x="25" y="25" width="350" height="175" class="media-border" />
+  <rect x="25" y="25" width="350" height="175" class="media-overlay" />
+  
+  <!-- Tournament bracket -->
+  <line x1="100" y1="70" x2="150" y2="70" class="media-details" />
+  <line x1="100" y1="90" x2="150" y2="90" class="media-details" />
+  <line x1="150" y1="70" x2="150" y2="90" class="media-details" />
+  <line x1="150" y1="80" x2="180" y2="80" class="media-details" />
+  
+  <line x1="100" y1="110" x2="150" y2="110" class="media-details" />
+  <line x1="100" y1="130" x2="150" y2="130" class="media-details" />
+  <line x1="150" y1="110" x2="150" y2="130" class="media-details" />
+  <line x1="150" y1="120" x2="180" y2="120" class="media-details" />
+  
+  <line x1="180" y1="80" x2="180" y2="120" class="media-details" />
+  <line x1="180" y1="100" x2="220" y2="100" class="media-details" />
+  
+  <line x1="250" y1="70" x2="300" y2="70" class="media-details" />
+  <line x1="250" y1="90" x2="300" y2="90" class="media-details" />
+  <line x1="250" y1="70" x2="250" y2="90" class="media-details" />
+  <line x1="220" y1="80" x2="250" y2="80" class="media-details" />
+  
+  <line x1="250" y1="110" x2="300" y2="110" class="media-details" />
+  <line x1="250" y1="130" x2="300" y2="130" class="media-details" />
+  <line x1="250" y1="110" x2="250" y2="130" class="media-details" />
+  <line x1="220" y1="120" x2="250" y2="120" class="media-details" />
+  
+  <line x1="220" y1="80" x2="220" y2="120" class="media-details" />
+  <line x1="220" y1="100" x2="220" y2="100" class="media-details" />
+  
+  <!-- Team names -->
+  <text x="90" y="70" class="media-text" text-anchor="end" font-size="10">TEAM A</text>
+  <text x="90" y="90" class="media-text" text-anchor="end" font-size="10">TEAM B</text>
+  <text x="90" y="110" class="media-text" text-anchor="end" font-size="10">TEAM C</text>
+  <text x="90" y="130" class="media-text" text-anchor="end" font-size="10">TEAM D</text>
+  
+  <text x="310" y="70" class="media-text" text-anchor="start" font-size="10">TEAM E</text>
+  <text x="310" y="90" class="media-text" text-anchor="start" font-size="10">TEAM F</text>
+  <text x="310" y="110" class="media-text" text-anchor="start" font-size="10">TEAM G</text>
+  <text x="310" y="130" class="media-text" text-anchor="start" font-size="10">TEAM H</text>
+  
+  <!-- Final match highlight -->
+  <rect x="190" y="90" width="60" height="20" fill="#00ff9922" stroke="#00ff99" stroke-width="2" stroke-dasharray="2,2" />
+  <text x="220" y="105" class="media-text" text-anchor="middle" font-size="10">FINAL</text>
+  
+  <!-- Play button -->
+  <circle cx="200" cy="112" r="25" fill="#00000055" stroke="#00ff99" stroke-width="1" />
+  <polygon points="190,97 190,127 220,112" fill="#00ff99" />
+  
+  <!-- Video title overlay -->
+  <rect x="25" y="160" width="350" height="40" fill="#00000077" />
+  <text x="200" y="185" class="media-text" text-anchor="middle" font-size="14">TOURNAMENT HIGHLIGHTS</text>
+  
+  <!-- Duration -->
+  <rect x="320" y="30" width="50" height="20" fill="#00000077" />
+  <text x="345" y="45" class="media-text" text-anchor="middle" font-size="12">10:45</text>
+</svg>
