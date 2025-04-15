@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
+    
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 36 100% 52%;
+    --primary-foreground: 0 0% 10%;
+    
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 40%;
+    --muted-foreground: 0 0% 80%;
+    
+    --accent: 118 100% 37%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 100% 62%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 36 100% 52%;
+    
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 80%;
+    --sidebar-primary: 36 100% 52%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 118 100% 37%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 36 100% 52%;
+    
+    --radius: 0.3rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply font-roboto antialiased bg-background text-foreground;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .font-stratum {
+    font-family: 'Stratum2', sans-serif;
+  }
+  
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  .font-roboto {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+  
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+  }
+  
+  .clip-diagonal-reverse {
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-line {
+    position: relative;
+  }
+  
+  .diagonal-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      135deg,
+      rgba(255, 156, 7, 0.1),
+      rgba(255, 156, 7, 0.1) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .text-glitch:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both;
+    text-shadow: 1px 1px 5px rgba(255, 156, 7, 0.7);
+  }
+  
+  .neon-flicker {
+    animation: flicker 8s infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s infinite;
+  }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.8; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Custom cursor styles */
+* {
+  cursor: none;
+}
+
+.cursor {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: normal;
+  transition: transform 0.2s ease;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: hsl(var(--primary));
+}
+
+.cursor-outline {
+  width: 24px;
+  height: 24px;
+  border: 2px solid hsl(var(--primary));
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-hover {
+  transform: scale(1.5);
+}
+
+.stat-progress {
+  animation: progress 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.weapon-card:hover .weapon-image {
+  transform: scale(1.1) translateY(-5px);
+}
+
+.weapon-card .weapon-image {
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
