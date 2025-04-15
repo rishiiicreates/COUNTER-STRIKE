@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PlaceholderImage from './ui/placeholder-image';
 
 interface MenuOption {
   id: string;
@@ -279,6 +280,12 @@ const GameInterface: React.FC = () => {
                             className="map-card relative border border-primary/60 aspect-video p-4 hover:bg-primary/10 transition-colors overflow-hidden"
                             whileHover={{ scale: 1.02 }}
                           >
+                            <PlaceholderImage 
+                              width="100%" 
+                              height="100%" 
+                              text={`MAP: ${map.name}`}
+                              className="absolute inset-0"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
                             <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
                               <div className="flex justify-between items-center">
@@ -434,14 +441,21 @@ const GameInterface: React.FC = () => {
                         <div className="cursor-link text-xs border border-primary/50 px-2 py-1">TYPE: VIDEO</div>
                       </div>
                       
-                      <div className="featured-media mb-8 border border-primary/60 aspect-video relative">
-                        <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="featured-media mb-8 border border-primary/60 aspect-video relative overflow-hidden">
+                        <PlaceholderImage 
+                          width="100%" 
+                          height="100%" 
+                          text="OPERATION HIGHLIGHTS"
+                          className="absolute inset-0"
+                        />
+                        
+                        <div className="absolute inset-0 flex items-center justify-center z-10">
                           <div className="play-button w-16 h-16 border-2 border-primary flex items-center justify-center cursor-pointer hover:bg-primary/20 transition-colors">
                             <div className="w-0 h-0 border-y-8 border-y-transparent border-l-12 border-l-primary ml-1"></div>
                           </div>
                         </div>
                         
-                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent z-10">
                           <h3 className="font-stratum text-xl">OPERATION HIGHLIGHTS</h3>
                           <div className="text-xs text-primary/70 mt-1">DURATION: 12:47 • VIEWS: 124,578</div>
                         </div>
@@ -451,10 +465,17 @@ const GameInterface: React.FC = () => {
                         {[1, 2, 3, 4].map(id => (
                           <motion.div 
                             key={id}
-                            className="media-thumb border border-primary/60 aspect-video relative cursor-pointer"
+                            className="media-thumb border border-primary/60 aspect-video relative cursor-pointer overflow-hidden"
                             whileHover={{ y: -5 }}
                           >
-                            <div className="absolute inset-0 flex items-center justify-center">
+                            <PlaceholderImage 
+                              width="100%" 
+                              height="100%" 
+                              text={`VIDEO ${id}`}
+                              className="absolute inset-0"
+                            />
+                            
+                            <div className="absolute inset-0 flex items-center justify-center z-10">
                               <div className="play-icon w-8 h-8 border border-primary flex items-center justify-center opacity-80">
                                 <div className="w-0 h-0 border-y-4 border-y-transparent border-l-6 border-l-primary ml-0.5"></div>
                               </div>

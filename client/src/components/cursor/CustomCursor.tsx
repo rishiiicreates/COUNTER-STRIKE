@@ -66,30 +66,67 @@ const CustomCursor = () => {
     }
   }, []);
 
-  const cursorDotStyles = {
-    left: `${position.x}px`,
-    top: `${position.y}px`,
+  // Square target indicator coordinates
+  const targetSize = linkHovered ? 15 : 8;
+  const targetStyles = {
+    left: `${position.x - targetSize / 2}px`,
+    top: `${position.y - targetSize / 2}px`,
+    width: `${targetSize}px`,
+    height: `${targetSize}px`,
     opacity: hidden ? 0 : 1,
-    transform: clicked ? 'scale(0.8)' : 'scale(1)'
+    transform: clicked ? 'rotate(45deg) scale(0.8)' : 'rotate(45deg) scale(1)'
   };
 
-  const cursorOutlineStyles = {
-    left: `${position.x - 12}px`,
-    top: `${position.y - 12}px`,
-    opacity: hidden ? 0 : 1,
-    transform: clicked ? 'scale(1.2)' : (linkHovered ? 'scale(1.5)' : 'scale(1)')
+  // Crosshair lines
+  const lineLength = 16; 
+  const lineWidth = 1;
+  const horizontalLineStyles = {
+    left: `${position.x - lineLength / 2}px`,
+    top: `${position.y - lineWidth / 2}px`,
+    width: `${lineLength}px`,
+    height: `${lineWidth}px`,
+    opacity: hidden ? 0 : (linkHovered ? 0 : 0.6)
+  };
+
+  const verticalLineStyles = {
+    left: `${position.x - lineWidth / 2}px`,
+    top: `${position.y - lineLength / 2}px`,
+    width: `${lineWidth}px`,
+    height: `${lineLength}px`,
+    opacity: hidden ? 0 : (linkHovered ? 0 : 0.6)
   };
 
   return (
     <>
+      {/* Square targeting element */}
       <div 
-        className={`cursor cursor-dot fixed z-[9999] pointer-events-none rounded-full bg-primary`} 
-        style={cursorDotStyles} 
+        className="cursor fixed z-[9999] pointer-events-none border border-primary"
+        style={targetStyles} 
+      />
+      
+      {/* Crosshair lines */}
+      <div 
+        className="cursor fixed z-[9998] pointer-events-none bg-primary"
+        style={horizontalLineStyles} 
       />
       <div 
-        className={`cursor cursor-outline fixed z-[9999] pointer-events-none rounded-full border-2 border-primary`} 
-        style={cursorOutlineStyles} 
+        className="cursor fixed z-[9998] pointer-events-none bg-primary"
+        style={verticalLineStyles} 
       />
+      
+      {/* Coordinates display */}
+      {!linkHovered && (
+        <div 
+          className="cursor fixed z-[9997] pointer-events-none font-mono text-[8px] text-primary opacity-60"
+          style={{
+            left: `${position.x + 16}px`,
+            top: `${position.y + 16}px`,
+            opacity: hidden ? 0 : 1
+          }}
+        >
+          X:{Math.round(position.x)} Y:{Math.round(position.y)}
+        </div>
+      )}
     </>
   );
 };
